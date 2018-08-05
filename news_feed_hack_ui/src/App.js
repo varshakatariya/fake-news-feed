@@ -41,6 +41,22 @@ class App extends Component {
                 }
             ]
         }
+		
+		this.checkNodeCall = this.checkNodeCall.bind(this);
+    }
+	
+	checkNodeCall(){
+
+        axios.get('http://localhost:3000/users/getData')
+            .then(response => {
+                var r = response.data.result;
+
+                console.log("Data coming from Node",response);
+
+            })
+            .catch(err => {
+                console.log(err, 'No Response from Node JS');
+            });
     }
 
     render() {
@@ -56,6 +72,8 @@ class App extends Component {
         let negativeNews = this.state.negativeTweets.map((elem) => {
             return <Tweet data={elem} />
         });
+		
+		this.checkNodeCall();
 
         return (
             <div className="App container align-content-center ">
